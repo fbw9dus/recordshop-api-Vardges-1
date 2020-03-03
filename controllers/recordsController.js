@@ -1,18 +1,25 @@
+
 // Pseudo-DB-Bibliothek importieren
 var { DataStore } = require('notarealdb')
 // Pseudo-DB erstellen
 var store = new DataStore('./data')
 // Collection für Shop-Artikel
-var records = store.collection('records')
+var track = store.collection('track')
 
 // Funktion um Liste der Artikel zurückzugeben
 exports.getRecords = (req, res, next) => {
-    res.status(200).send(records.list());
+    res.status(200).send(track.list());
 }
 
 // Funktion um neuen Aretikel hinzuzufügen
 exports.addRecord = (req, res, next) => {
-    const record = req.body;
-    records.create(record)
-    res.status(200).send(record);
+    const data = req.body;
+    track.create(data)
+    res.status(200).send(data);
 }
+
+
+
+
+
+
