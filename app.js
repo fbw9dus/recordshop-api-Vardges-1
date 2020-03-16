@@ -11,6 +11,9 @@ const usersRouter = require("./routes/users");
 const recordsRouter = require("./routes/records");
 const ordersRouter = require("./routes/orders");
 const { setCors } = require("./middleware/security");
+// Animals-Router importieren
+var animalRouter = require('./routes/animals')
+var trackRouter = require('./routes/tracks')
 
 /** INIT */
 const app = express();
@@ -18,6 +21,7 @@ const app = express();
 /** LOGGING */
 app.use(logger("dev"));
 
+// Mit der Datenbank verbinden
 /**CONNECT TO DB */
 mongoose.connect("mongodb://localhost:27017/record-shop", {
   useNewUrlParser: true,
@@ -46,6 +50,10 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/records", recordsRouter);
 app.use("/orders", ordersRouter);
+// Den Router für Animals einbinden
+app.use('/animals', animalRouter)
+// den Router für Animals einbinden
+app.use('/tracks', trackRouter)
 
 /** ERROR HANDLING */
 /*app.use(function(req, res, next) {
