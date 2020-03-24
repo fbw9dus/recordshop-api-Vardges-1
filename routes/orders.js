@@ -5,22 +5,22 @@ const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("data/db.json");
 const db = low(adapter);
 const {
-  getUsers,
-  getUser,
-  updateUser,
-  deleteUser,
-  addUser
-} = require("../controllers/usersController");
+  getOrders,
+  getOrder,
+  updateOrder,
+  deleteOrder,
+  addOrder
+} = require("../controllers/ordersController");
 
 router
   .route("/")
-  .get(getUsers)
-  .post(addUser);
+  .get(getOrders)
+  .post(addOrder);
 
 router
   .route("/:id")
-  .get(getUser)
-  .delete(deleteUser)
-  .put(updateUser);
+  .get(getOrder)
+  .delete(deleteOrder)
+  .put(updateOrder);
 
 module.exports = router;
