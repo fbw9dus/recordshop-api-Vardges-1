@@ -1,35 +1,40 @@
+var User = require('../models/User')
 
-exports.getUsers = (req, res, next) => {
+
+exports.getUsers = async (req, res) => {
   // Schreib hier code um alle Kunden aus der users-Collection zu holen
+  var user = await User.find()
 
-  res.status(200).send(users);
+  res.status(200).send(user);
 };
 
-exports.getUser = (req, res, next) => {
+exports.getUser = async (req, res) => {
   const { id } = req.params;
   // Schreib hier code um den Kunden mit der id aus params aus der users-Collection zu holen
-
+  var user = await User.findById(id)
   res.status(200).send(user);
 };
 
-exports.deleteUser = (req, res, next) => {
+exports.deleteUser = async (req, res) => {
   const { id } = req.params;
   // Schreib hier code um den Kunden mit der id aus params aus der users-Collection zu löschen
-
+  var user = await User.deleteMany(id)
   res.status(200).send(user);
 };
 
-exports.updateUser = (req, res, next) => {
+exports.updateUser = async (req, res) => {
   const { id } = req.params;
+   // Daten aus Request-Body speichern
   const dt = req.body;
-  // Schreib hier code um den User mit der id aus params in der users-Collection mit den Daten aus req.body zu aktualisieren
-
+  // Document mit dieser id mit Daten aus req.body in Collection aktualisieren
+  var user = await Animal.findByIdAndUpdate(id, dt, {new: true})
   res.status(200).send(user);
 };
 
-exports.addUser = (req, res, next) => {
-  const user = req.body;
+exports.addUser = async (req, res) => {
+  const data = req.body;
   // Schreib hier code um die Daten des neuen Kunden aus req.body in der users-Collection zu speichern
-
+  var user = new User(data)
+  await user.save()
   res.status(200).send(user);
 };
