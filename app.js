@@ -10,11 +10,10 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const recordsRouter = require("./routes/records");
 const ordersRouter = require("./routes/orders");
-const { setCors } = require("./middleware/security");
-// Animals-Router importieren
 var animalRouter = require('./routes/animals')
 var trackRouter = require('./routes/tracks')
 
+const { setCors } = require("./middleware/security");
 /** INIT */
 const app = express();
 
