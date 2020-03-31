@@ -51,7 +51,8 @@ const Owner = mongoose.model('Owner', OwnerSchema)
     })
 
     // Lesen
-    const owner = await Owner.findById(max.id).populate('car')
+    // minus id ich sage das vond car Datei id ich will nicht haben
+    const owner = await Owner.findById(max.id).populate('car', '- _id') 
     console.log(owner)
     
 })()

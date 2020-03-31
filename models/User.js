@@ -37,28 +37,7 @@
 
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-
-mongoose.connect("mongodb://localhost:27017/record-shop", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-});
-
-const cityDaten = new Schema({
-  city: {
-      type: String,
-      required: true
-  },
-  street:{
-      type: String,
-      required: true
-  }, 
-  nummer: {
-      type: Number,
-      required: true
-  }
-
-})
+const Adresschema  = require('./Addres')
 
 
 
@@ -79,7 +58,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  cityDaten: cityDaten
+  Adresschema: Adresschema
 }, {
   toObject: {
     virtuals: true
