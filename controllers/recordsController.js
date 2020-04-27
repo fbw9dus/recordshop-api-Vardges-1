@@ -36,7 +36,8 @@ exports.updateRecord = async (req, res, next) => {
 exports.addRecord = async (req, res, next) => {
   const dt = req.body;
   // Schreib hier code um die Daten des neuen record aus req.body in der records-Collection zu speichern
-  const record = new Record(dt);
-  await record.save();
+  // const record = new Record(dt);
+  // await record.save();
+  const record = Record.create(dt);
   res.status(200).send(record);
 };

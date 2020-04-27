@@ -14,7 +14,7 @@ const validateInputs = rules => {
             next()
             
             }
-                ]
+          ]
 
 }
 

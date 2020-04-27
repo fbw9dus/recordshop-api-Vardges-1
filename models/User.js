@@ -36,8 +36,12 @@
 // module.exports = mongoose.model("User", UserSchema);
 
 const mongoose = require("mongoose");
-const {Schema} = mongoose;
-const Adresschema  = require('./Addres')
+const bcrypt = require('bcrypt')
+
+const {
+  Schema
+} = mongoose;
+const Adresschema = require('./Addres')
 
 
 
@@ -58,24 +62,31 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  Adresschema: Adresschema
-}, {
+  address: Adresschema
+  }, {
   toObject: {
     virtuals: true
   },
   toJSON: {
     virtuals: true
   },
- 
+
 });
 
 
-const User = mongoose.model('User', UserSchema);
+// const User = mongoose.model('User', UserSchema);
 
 
 UserSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
+
+UserSchema.pre("save", async function(next)  {
+  
+  if(!this.isModified("password")) return next()
+  this.password = await  bcrypt.hash(this.password, 10)
+  next()
+})
 
 module.exports = mongoose.model("User", UserSchema);

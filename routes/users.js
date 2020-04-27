@@ -11,7 +11,8 @@ const {
   getUser,
   updateUser,
   deleteUser,
-  addUser
+  addUser,
+  loginUser
 } = require("../controllers/usersController");
 
 router
@@ -19,10 +20,18 @@ router
   .get(getUsers)
   .post(validateInputs(userValidationRules), addUser);
 
+
+
+router
+.route("/login")
+.post(loginUser);
+
+
 router
   .route("/:id")
   .get(getUser)
   .delete(deleteUser)
   .put(updateUser);
+  
 
 module.exports = router;
