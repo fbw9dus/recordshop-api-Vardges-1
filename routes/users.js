@@ -20,12 +20,8 @@ router
   .get(getUsers)
   .post(validateInputs(userValidationRules), addUser);
 
-
-
-router
-.route("/login")
-.post(loginUser);
-
+router.route("/login")
+  .post(loginUser)
 
 router
   .route("/:id")

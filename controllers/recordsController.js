@@ -1,12 +1,19 @@
 const Record   = require('../models/Record');
+const createError = require('http-errors');
 
 
 
 exports.getRecords = async (req, res, next) => {
-  // Schreib hier code um alle records aus der records-Collection zu holen
-  const records = await Record.find()
-
-  res.status(200).send(records);
+  try {
+    const { id } = req.params;
+    // Schreib hier code um das record mit der id aus params aus der records-Collection zu holen
+    const record = Record.findById(id)
+    if(!record) throw new createError.NotFound()
+    res.status(200).send(record);
+  } catch (error) {
+    next(error)
+  }
+  
 };
 
 exports.getRecord = async (req, res, next) => {

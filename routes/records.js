@@ -3,7 +3,8 @@ const router = express.Router();
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("data/db.json");
-const db = low(adapter);
+const auth = require('../middleware/authenticator')
+
 const {
   getRecords,
   getRecord,
@@ -12,10 +13,11 @@ const {
   addRecord
 } = require("../controllers/recordsController");
 
+
 router
   .route("/")
   .get(getRecords)
-  .post(addRecord);
+  .post(auth, addRecord);
 
 router
   .route("/:id")
